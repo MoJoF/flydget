@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flydget</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="page dashboard-page">
+        <div class="page__header">
+            <div class="header__block">
+                <span class="header_text">Доход</span>
+                <span id="receive_summ" class="big_text">454 Р</span>
+            </div>
+            <div class="header__block">
+                <span class="header_text">Оставшаяся сумма</span>
+                <span id="summ" class="big_text">4654654 Р</span>
+            </div>
+        </div>
+
+        <div class="page__body">
+            <span class="header_text">Расходы</span>
+            <span class="small_text">Вы еще ничего не потратили. Чтобы создать расход, нажмите кнопку “Добавить”.</span>
+            <table cellspacing="5" border="2" cols="5" align="left">
+                <thead align="left" cellpadding="5">
+                    <th class="small_text">№</th>
+                    <th class="small_text">Название</th>
+                    <th class="small_text">Сумма</th>
+                    <th class="small_text">Категория</th>
+                    <th class="small_text">Дата и время</th>
+                    <th class="small_text">Удалить</th>
+                </thead>
+                <tbody id="spents_table" align="left"></tbody>
+            </table>
+            <button class="dash__add_spent">Добавить</button>
+        </div>
+    </div>
+
+    <div class="page add-receive" style="display: none;">
+        <h1>kjkjkjk</h1>
+    </div>
+
+    <script src="/js/reactify.js"></script>
+    <script src="/js/modules/data.js"></script>
+    <script>
+        const R = Reactify()
+        document.addEventListener('DOMContentLoaded', () => R.emit('dom-loaded'))
+    </script>
+    <script src="/js/modules/main.module.js"></script>
+    <script src="/js/modules/add_receive.module.js"></script>
+    <script src="/js/modules/sync.module.js"></script>
+</body>
+</html>

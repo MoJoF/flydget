@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap');
+
+:root {
+    --accent-color: #F0A500;
+    --bg-color: #1B1A17;
+    --primary-color: #E6D5B8;
+    --secondary-color: #E45826;
+    --font: 'Jura';
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--primary-color);
+    font-family: 'Jura';
+    font-weight: bold;
+}
+
+body {
+    background: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    padding: 100px 0;
+}
+
+.big_text {
+    font-size: 48px;
+    color: var(--accent-color);
+}
+
+.header_text {
+    font-size: 36px;
+    color: var(--primary-color);
+}
+
+.small_text {
+    font-size: 24px;
+    color: var(--primary-color);
+}
+
+button {
+    width: fit-content;
+    padding: 10px;
+    background: var(--secondary-color);
+    color: var(--bg-color);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+button.delete {
+    background: red;
+    color: #fff;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.page__header {
+    display: flex;
+    gap: 50px;
+}
+
+.header__block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.page__body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+th, td { padding: 5px; }
