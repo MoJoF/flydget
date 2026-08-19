@@ -14,6 +14,14 @@ window.monthStat = {
   spents: [],
 };
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js')
+    .then(() => {
+      console.log('Service Worker registered');
+    })
+    .catch(console.error);
+}
+
 localforage.getItem("settings").then((data) => {
   if (data === null) {
     window.settings = {

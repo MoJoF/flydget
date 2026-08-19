@@ -1,51 +1,62 @@
-const CACHE = "flydget-ui-cache"
+const CACHE = 'flydget-ui-cache-v1';
 
-self.addEventListener('install', e => {
-    e.waitUntil(
-        caches.open(CACHE).then(c => {
-            c.addAll([
-                'index.html',
-                'logo.png',
-                'index.css',
-                'app/index.html',
-                'app/style.css',
-                'app/script.js',
-                'app/imgs/mobile_4.jpg',
-                'app/imgs/mobile_3.jpg',
-                'app/imgs/mobile_2.jpg',
-                'app/imgs/mobile_1.jpg',
-                'app/imgs/desktop_4.jpg',
-                'app/imgs/desktop_3.jpg',
-                'app/imgs/desktop_2.jpg',
-                'app/imgs/desktop_1.jpg',
-                'app/imgs/logo96.png',
-                'app/imgs/logo72.png',
-                'app/imgs/logo48.png',
-                'app/imgs/logo192.png',
-                'app/imgs/logo168.png',
-                'app/imgs/logo144.png',
-            ])
-        })
-    )
-})
+const FILES = [
+    '/',
+    '/index.html',
+    '/logo.png',
+    '/index.css',
+    '/manifest.json',
 
-function fromCache(request) {
-    return caches.open(CACHE).then(c => {
-        c.match(request).then(matching => {
-            matching || Promise.reject('no-match')
-        })
-    })
-}
+    '/app/index.html',
+    '/app/style.css',
+    '/app/script.js',
 
-function update(request) {
-    return caches.open(CACHE).then(c => {
-        fetch(request).then(resp => {
-            cache.put(request, resp)
-        })
-    })
-}
+    '/app/imgs/mobile_4.jpg',
+    '/app/imgs/mobile_3.jpg',
+    '/app/imgs/mobile_2.jpg',
+    '/app/imgs/mobile_1.jpg',
 
-self.addEventListener('fetch', e => {
-    e.respondWith(fromCache(e.request))
-    e.waitUntil(update(e.request))
-})
+    '/app/imgs/desktop_4.jpg',
+    '/app/imgs/desktop_3.jpg',
+    '/app/imgs/desktop_2.jpg',
+    '/app/imgs/desktop_1.jpg',
+
+    '/app/imgs/logo48.png',
+    '/app/imgs/logo72.png',
+    '/app/imgs/logo96.png',
+    '/app/imgs/logo144.png',
+    '/app/imgs/logo168.png',
+    '/app/imgs/logo192.png',
+    '/app/imgs/logo512.png'
+];
+
+self.addEventListener('install', event => {
+    event.waitUntil(
+        caches.open(CACHE)
+            .then(cache => cache.addAll(FILES))
+    );
+});
+
+self.addEventListener('activate', event => {
+    event.waitUntil(
+        caches.keys().then(keys =>
+            Promise.all(
+                keys
+                    .filter(key => key !== CACHE)
+                    .map(key => caches.delete(key))
+            )
+        )
+    );
+});
+
+self.addEventListener('fetch', event => {
+    event.respondWith(
+        caches.match(event.request)
+            .then(cached => {
+                if (cached) {
+                    return cached;
+                }
+                return fetch(event.request);
+            })
+    );
+});
