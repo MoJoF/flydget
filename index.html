@@ -1,54 +1,117 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>flydget</title>
-    <link rel="stylesheet" href="/style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Flydget — все расходы в твоем кармане.</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="icon" type="image/x-icon" href="./logo.png" />
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./sw.js"></script>
 </head>
 <body>
-    <div class="page dashboard-page">
-        <div class="page__header">
-            <div class="header__block">
-                <span class="header_text">Доход</span>
-                <span id="receive_summ" class="big_text">454 Р</span>
-            </div>
-            <div class="header__block">
-                <span class="header_text">Оставшаяся сумма</span>
-                <span id="summ" class="big_text">4654654 Р</span>
-            </div>
+    <header>
+        <nav>
+            <h1 class="flydgetTitle">Flydget</h1>
+        </nav>
+    <nav>
+        <a class="flydgetButton" href="./app/index.html">Начать</a>
+        <select>
+            <option>ru</option>
+        </select>
+    </nav>
+    </header>
+    <section class="description">
+    <span>Встречайте приложение для учета ваших повседневных расходов</span>
+    <img src="./app/imgs/desktop_3.png" alt="">
+    </section>
+    <section class="advantages">
+    <h2 class="bigTitle">Почему Flydget?</h2>
+    <div class="advantagesCont">
+        <!-- <div class="advantage">
+            <span class="material-symbols-outlined">wifi_off</span>
+            <span class="advantageTitle">Работает оффлайн</span>
+            <span class="advantageDescription">Вам нужно зайти в приложение один раз и оно будет работать без интернета.</span>
+        </div> -->
+        <div class="advantage">
+        <span class="material-symbols-outlined">sd_card</span>
+        <span class="advantageTitle">Все данные у вас</span>
+        <span class="advantageDescription">Информация хранится на вашем устройстве и никто не может получить к ним доступ извне.</span>
         </div>
-
-        <div class="page__body">
-            <span class="header_text">Расходы</span>
-            <span class="small_text">Вы еще ничего не потратили. Чтобы создать расход, нажмите кнопку “Добавить”.</span>
-            <table cellspacing="5" border="2" cols="5" align="left">
-                <thead align="left" cellpadding="5">
-                    <th class="small_text">№</th>
-                    <th class="small_text">Название</th>
-                    <th class="small_text">Сумма</th>
-                    <th class="small_text">Категория</th>
-                    <th class="small_text">Дата и время</th>
-                    <th class="small_text">Удалить</th>
-                </thead>
-                <tbody id="spents_table" align="left"></tbody>
-            </table>
-            <button class="dash__add_spent">Добавить</button>
+        <div class="advantage">
+        <span class="material-symbols-outlined">devices</span>
+        <span class="advantageTitle">Адаптивность</span>
+        <span class="advantageDescription">Управляйте своими расходами на любом устройстве.</span>
+        </div>
+        <div class="advantage">
+        <span class="material-symbols-outlined">money_off</span>
+        <span class="advantageTitle">Бесплатно</span>
+        <span class="advantageDescription">Вы не платите за пользование.</span>
+        </div>
+        <div class="advantage">
+        <span class="material-symbols-outlined">web_asset</span>
+        <span class="advantageTitle">Удобный интерфейс</span>
+        <span class="advantageDescription">Интуитивно понятное управление.</span>
+        </div>
+        <div class="advantage">
+        <span class="material-symbols-outlined">wifi_protected_setup</span>
+        <span class="advantageTitle">Мобильность</span>
+        <span class="advantageDescription">Вы можете перенести данные с одного устройства на другое в пару кликов.</span>
+        </div>
+        <div class="advantage">
+        <span class="material-symbols-outlined">analytics</span>
+        <span class="advantageTitle">Визуализация</span>
+        <span class="advantageDescription">Получайте аналитику ваших расходов в реальном времени.</span>
+        </div>
+        <div class="advantage">
+        <span class="material-symbols-outlined">file_download_off</span>
+        <span class="advantageTitle">Web</span>
+        <span class="advantageDescription">Вам не нужно ничего скачивать.</span>
+        </div>
+        <div class="advantage">
+        <span class="material-symbols-outlined">calculate</span>
+        <span class="advantageTitle">Калькуляция</span>
+        <span class="advantageDescription">От вас требуется лишь ввести данные. Система все подсчитает автоматически.</span>
+        </div>
+        <div class="advantage">
+        <span class="material-symbols-outlined">file_upload_off</span>
+        <span class="advantageTitle">Анонимность</span>
+        <span class="advantageDescription">Мы не храним ваши данные. Вся база данных находится у вас в браузере.</span>
+        </div>
+        <div class="advantage">
+        <span class="material-symbols-outlined">language</span>
+        <span class="advantageTitle">Мультиязычность</span>
+        <span class="advantageDescription">Приложение доступно на нескольких языках (на данный момент в разработке).</span>
         </div>
     </div>
-
-    <div class="page add-receive" style="display: none;">
-        <h1>kjkjkjk</h1>
+    </section>
+    <section class="book">
+    <h2 class="bigTitle">Flydget - это ваша персональная
+    учетная книга для повседневных
+    расходов.</h2>
+    <img src="./app/imgs/desktop_4.png" alt="">
+    </section>
+    <section class="mission">
+    <h2 class="bigTitle">Тратьте ровно столько, сколько
+    требуется!</h2>
+    <span>Нашей миссией было разработать приложение, доступное для всех, которое помогает контролировать свои расходы и избавляться от лишних трат.</span>
+    </section>
+    <section class="call">
+    <h2 class="bigTitle">Начните пользоваться Flydget уже сейчас!</h2>
+    <div>
+        <span>Чтобы начать пользоваться просто пройдите по ссылке:</span>
+        <a class="flydgetButton" href="./app/app.html">Flydget</a>
     </div>
-
-    <script src="/js/reactify.js"></script>
-    <script src="/js/modules/data.js"></script>
-    <script>
-        const R = Reactify()
-        document.addEventListener('DOMContentLoaded', () => R.emit('dom-loaded'))
-    </script>
-    <script src="/js/modules/main.module.js"></script>
-    <script src="/js/modules/add_receive.module.js"></script>
-    <script src="/js/modules/sync.module.js"></script>
+    </section>
+    <footer>
+    <div class="row">
+        <h1 class="flydgetTitle">Flydget</h1>
+        <span class="footerText">Все права защищены</span>
+    </div>
+    <div class="row">
+        <span class="footerText">Сайт разработан в 2024 году.</span>
+        <span class="footerText">©Flybuk</span>
+    </div>
+    </footer>
 </body>
 </html>

@@ -1,0 +1,894 @@
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap');
+
+
+* {
+  font-family: "Jura";
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  background: #1B1A17;
+}
+
+.modalRec,
+.modalSpent,
+.modalNewReceive,
+.settingsModal,
+.modalExport,
+.modalImport {
+  position: absolute;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: #1B1A17;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+span.title {
+  color: #E6D5B8;
+  font-weight: bold;
+  font-size: 36px;
+  display: block;
+}
+
+span.littleText {
+  font-size: 24px;
+  font-weight: bold;
+  color: #E6D5B8;
+  width: 50vw;
+}
+
+span.sum {
+  color: #F0A500;
+  font-weight: bold;
+  font-size: 48px;
+}
+
+.mainMenu {
+  margin: 0 17.7vw;
+}
+
+/* Экспорт/импорт данных */
+.export,
+.import {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.import > span.alert {
+  display: block;
+}
+
+.export>textarea,
+.import>textarea {
+  background: transparent;
+  user-select: all;
+  font-size: 24px;
+  color: #E6D5B8;
+  padding: 5px;
+  outline: none;
+}
+
+.export>textarea::-webkit-scrollbar,
+.import>textarea::-webkit-scrollbar {
+  display: none;
+}
+
+button.exportButton, button.importButton {
+  font-size: 20px;
+  padding: 10px;
+  background: #E45826;
+  color: #1B1A17;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Настройки */
+.settingsModal {
+  display: none;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow-y: scroll;
+}
+
+.settings {
+  margin-left: 17.7vw;
+}
+
+button.backToMainMenu {
+  margin-top: 50px;
+  font-size: 20px;
+  padding: 10px;
+  background: #E45826;
+  color: #1B1A17;
+  font-weight: bold;
+  border-radius: 10px 0 0 10px;
+  border: none;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.settings>span.title {
+  margin-top: 10px;
+}
+
+.currencyToggleContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 50vw;
+  margin-top: 40px;
+  align-items: center;
+}
+
+.currencyToggleContainer>select.currencyChanger {
+  background: #F0A500;
+  color: #1B1A17;
+  font-weight: bold;
+  font-size: 32px;
+  border-radius: 5px;
+}
+
+.currencyToggleContainer>select.currencyChanger>option {
+  font-weight: bold;
+}
+
+.priorityTogglerContainer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.priorityTogglerContainer>input[type=checkbox] {
+  width: 2.5vw;
+  outline: none;
+}
+
+.categoriesMenu {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.categoriesMenu>.newCategory {
+  display: flex;
+}
+
+.categoriesMenu>.newCategory>input {
+  outline: none;
+  border: 1px solid #E45826;
+  background: transparent;
+  font-size: 24px;
+  padding: 5px;
+  color: #E6D5B8;
+}
+
+.categoriesMenu>.newCategory>button.addCategory {
+  background: forestgreen;
+  color: snow;
+  font-weight: bold;
+  font-size: 24px;
+  border: 1px solid forestgreen;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.categoriesList {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: fit-content;
+}
+
+.categoriesList>.category {
+  font-size: 24px;
+  color: #1B1A17;
+  background: #E45826;
+  display: flex;
+}
+
+.categoriesList>.category>span {
+  font-weight: bold;
+  padding: 10px;
+  width: 15vw;
+}
+
+.categoriesList>.category>button {
+  background: #DB1B1B;
+  color: snow;
+  padding: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  border: 1px solid #DB1B1B;
+  cursor: pointer;
+}
+
+/* Главное меню */
+.menu {
+  margin-top: 10px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header>.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-end;
+}
+
+header>.buttons>div>button {
+  font-size: 20px;
+  padding: 10px;
+  background: #E45826;
+  color: #1B1A17;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.receiveBlock {
+  margin-top: 10px;
+  display: flex;
+  gap: 100px;
+}
+
+.receiveBlock>div {
+  display: flex;
+  flex-direction: column;
+}
+
+div.receiveBlock>div.receive>div {
+  display: flex;
+  gap: 20px;
+}
+
+button.addNewReceive {
+  text-align: left;
+  font-size: 30px;
+  background: transparent;
+  border: 1px solid #F0A500;
+  border-radius: 5px;
+  color: #F0A500;
+  width: fit-content;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.spentsBlock {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.spentsBlock > div > span {
+  width: fit-content;
+}
+
+th {
+  font-weight: bold;
+  font-size: 24px;
+  color: #E45826;
+  text-align: left;
+}
+
+
+tbody tr {
+  margin-top: 10px;
+  background: #E45826;
+  padding: 12px 5px;
+}
+
+td {
+  font-weight: bold;
+  font-size: 24px;
+  color: #1B1A17;
+  padding: 5px;
+}
+
+td.button {
+  padding: 5px;
+  cursor: pointer;
+  background: #DB1B1B;
+  color: snow;
+}
+
+td.editButton {
+  background: #F0A500;
+  color: #1B1A17;
+}
+
+td.saveButton {
+  background: forestgreen;
+  color: snow;
+}
+
+button.addSpent,
+button.showDiagram {
+  margin-top: 25px;
+  font-size: 24px;
+  padding: 12px;
+  background: #E45826;
+  color: #1B1A17;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+td {
+  padding: 5px 10px;
+}
+
+th {
+  padding: 0 5px;
+}
+
+.editCategory {
+  background: #E45826;
+  color: #1B1A17;
+  border: 1px solid #1B1A17;
+  font-weight: bold;
+}
+
+.editCategory>option {
+  font-weight: bold;
+}
+
+/* Убираем стрелочки с input */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Модальное окно для ввода дохода */
+.debetModal {
+  width: 50vw;
+  font-weight: bold;
+  font-size: 36px;
+  color: #E6D5B8;
+  background: #1B1A17;
+  padding: 20px;
+  border-radius: 5px;
+  border: 5px solid #F0A500;
+}
+
+.debetModal>span {
+  display: block;
+}
+
+.debetModal>input {
+  display: block;
+  margin: 20px auto 10px auto;
+  background: #E6D5B8;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px 0;
+  width: 20vw;
+}
+
+.debetModal>button {
+  display: block;
+  margin: 10px auto 0 auto;
+  padding: 12px 12px;
+  font-weight: bold;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  background: #F0A500;
+  cursor: pointer;
+  color: #1B1A17;
+}
+
+/* Меню для добавления дохода */
+.recCont {
+  width: 50vw;
+  font-weight: bold;
+  font-size: 36px;
+  color: #E6D5B8;
+  background: #1B1A17;
+  padding: 20px;
+  border-radius: 5px;
+  border: 5px solid #F0A500;
+}
+
+.recCont>span {
+  display: block;
+}
+
+.recCont>input {
+  display: block;
+  margin: 20px auto 10px auto;
+  background: #E6D5B8;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px 0;
+  width: 20vw;
+}
+
+.recCont>.buttonsCont {
+  display: flex;
+  gap: 10px;
+}
+
+.recCont>.buttonsCont>button {
+  display: block;
+  margin: 10px auto 0 auto;
+  padding: 12px 12px;
+  font-weight: bold;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  background: #F0A500;
+  cursor: pointer;
+  color: #1B1A17;
+}
+
+/* Модальное окно для ввода нового расхода */
+.addSpentModal {
+  padding: 20px;
+  color: #E45826;
+  width: 50vw;
+  background: #1B1A17;
+  border-radius: 10px;
+  border: 5px solid #E45826;
+}
+
+.addSpentModal>.title {
+  color: #E6D5B8;
+  font-weight: bold;
+  font-size: 36px;
+}
+
+.addSpentModal>.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  justify-content: center;
+}
+
+.addSpentModal>.inputContainer>div {
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.addSpentModal>button {
+  color: #1B1A17;
+}
+
+.addSpentModal>.inputContainer>div>input {
+  background: #E45826;
+  border: none;
+  font-size: 20px;
+  width: 50vw;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.addSpentModal>button {
+  border: none;
+  padding: 12px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  background: #E45826;
+  cursor: pointer;
+}
+
+textarea.description {
+  background: #E45826;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+  outline: none;
+}
+
+select.category {
+  background: #F0A500;
+  color: #1B1A17;
+  font-weight: bold;
+}
+
+select.category>option {
+  font-weight: bold;
+  color: #1B1A17;
+}
+
+.alert {
+  display: none;
+  /* block */
+  margin-top: 20px;
+  font-size: 20px;
+  color: #DB1B1B;
+  font-weight: bold;
+}
+
+select {
+  font-size: 20px;
+  border: none;
+  color: #E6D5B8;
+  background: #1B1A17;
+  outline: none;
+  font-weight: bold;
+}
+
+.tdPriority {
+  text-align: center;
+}
+
+/* Приоритеты */
+.high {
+  color: snow;
+  background: #DB1B1B;
+}
+
+.middle {
+  color: #1B1A17;
+  background: #F0A500;
+}
+
+.low {
+  background: forestgreen;
+  color: snow;
+}
+
+/* Диаграмма */
+.diagram {
+  padding: 0 300px 0 0;
+  display: none;
+}
+
+.diagram>.chartBlock>p {
+  color: #E6D5B8;
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.diagram>.chartBlock>select.changeChart {
+  margin-top: 10px;
+  background-color: #E6D5B8;
+  color: #1B1A17;
+  font-weight: bold;
+}
+
+.diagram>.chartBlock>select.changeChart>option {
+  font-weight: bold;
+}
+
+#cchart {
+  scale: .9;
+}
+
+@media (400px < width <= 850px) {
+  .mainMenu {
+    margin: 0 20px;
+  }
+
+  .menu {
+    margin-top: 10px;
+  }
+
+  header>.buttons>div>button {
+    font-size: 16px;
+  }
+
+  span.title {
+    font-size: 24px;
+  }
+
+  span.sum {
+    font-size: 24px;
+  }
+
+  button.addNewReceive {
+    font-size: 16px;
+  }
+
+  th {
+    font-size: 20px;
+  }
+
+  td {
+    font-size: 16px;
+  }
+
+  button.addSpent, button.showDiagram {
+    font-size: 16px;
+    padding: 5px;
+    margin-top: 10px;
+  }
+
+  td.priority {
+    padding: 5px;
+  }
+
+  td>select.priority {
+    font-size: 16px;
+  }
+
+  .diagram>.chartBlock>p {
+    font-size: 16px;
+  }
+
+  .diagram>.chartBlock>select.changeChart {
+    font-size: 16px;
+  }
+
+  .settings {
+    margin-left: 10px;
+  }
+
+  button.backToMainMenu {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+
+  .settings span.title {
+    margin-top: 20px;
+  }
+
+  .currencyToggleContainer>select.currencyChanger {
+    font-size: 24px;
+  }
+
+  .priorityTogglerContainer {
+    width: 50%;
+  }
+
+  .categoriesMenu>.newCategory>input,
+  .categoriesMenu>.newCategory>button.addCategory {
+    font-size: 16px;
+  }
+
+  .categoriesList {
+    display: flex;
+    gap: 5px 5px;
+    flex-wrap: wrap;
+    height: 90px;
+    overflow-x: scroll;
+  }
+
+  .categoriesList::-webkit-scrollbar {
+    display: none;
+  }
+
+  .categoriesList>.category {
+    font-size: 16px;
+    color: #1B1A17;
+    background: #E45826;
+    display: flex;
+    width: fit-content;
+  }
+
+  .categoriesList>.category>span {
+    font-size: 16px;
+  }
+
+  .categoriesList>.category>button {
+    font-size: 16px;
+  }
+
+  .export>textarea,
+  .import>textarea {
+    font-size: 16px;
+  }
+
+  button.exportButton,
+  button.importButton {
+    font-size: 16px;
+    padding: 5px;
+  }
+
+  .recCont>span {
+    font-size: 24px;
+  }
+
+  .recCont>input {
+    margin: 20px auto;
+    font-size: 16px;
+  }
+
+  .recCont>.buttonsCont>button {
+    margin: 0 auto;
+    padding: 5px;
+    font-size: 16px;
+  }
+}
+
+@media (width <=400px) {
+  /* Настройки */
+  .settings {
+    margin: 0;
+    width: inherit;
+  }
+
+  div.settingsModal>div>div.currencyToggleContainer {
+    margin-top: 10px;
+  }
+
+  .currencyToggleContainer {
+    width: inherit;
+  }
+
+  body>div.settingsModal>div>div.priorityTogglerContainer>input[type=checkbox] {
+    width: 7.5vw;
+  }
+
+  .categoriesList>.category {
+    width: 80vw;
+  }
+
+  .categoriesList>.category>span {
+    width: 75vw;
+    font-size: 20px;
+  }
+
+  .categoriesList>.category>button {
+    font-size: 20px;
+  }
+
+  /* Главное меню */
+  header>.buttons>button {
+    padding: 5px;
+    background: #E45826;
+    color: #1B1A17;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+
+  header>.buttons>div>button {
+    font-size: 16px;
+    padding: 5px;
+  }
+
+  .mainMenu {
+    margin: 0;
+    width: 100vw;
+  }
+
+  span.title {
+    font-size: 20px;
+  }
+
+  span.sum {
+    font-size: 28px;
+  }
+
+  button.addNewReceive {
+    font-size: 20px;
+  }
+
+  .receiveBlock {
+    gap: 20px;
+  }
+
+  div.mainMenu>div>div.receiveBlock>div.receive>div {
+    gap: 10px;
+  }
+
+  .spentsBlock {
+    margin-top: 20px;
+  }
+
+  span.littleText {
+    font-size: 16px;
+    width: 100vw;
+  }
+
+  table {
+    width: 100vw;
+    overflow: scroll;
+  }
+
+  th,
+  td {
+    font-size: 16px;
+  }
+
+  button.addSpent {
+    margin-top: 10px;
+    font-size: 16px;
+    padding: 5px;
+  }
+
+  button.showDiagram {
+    padding: 5px;
+    background: #E45826;
+    color: #1B1A17;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+
+  /* Создание новой транзакции */
+  .addSpentModal {
+    width: 85vw;
+    padding: 10px;
+  }
+
+  .inputContainer {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  .inputContainer>div>span {
+    font-size: 20px;
+  }
+
+  .inputContainer>div>input {
+    font-size: 16px;
+    width: 40vw;
+  }
+
+  select.category {
+    width: 70%;
+  }
+
+  /* Ввод первоначального дохода */
+  .modalRec {
+    width: 101vw;
+  }
+
+  .debetModal,
+  .recCont {
+    width: 85vw;
+  }
+
+  .debetModal>input,
+  .recCont>input {
+    width: 45vw;
+    font-size: 24px;
+  }
+
+  /* Диаграмма */
+  .diagram {
+    padding: 0;
+  }
+
+  .diagram>.chartBlock>#cchart {
+    margin: 0;
+    width: 80vw !important;
+    height: 80vw !important;
+  }
+}

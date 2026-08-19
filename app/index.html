@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Flydget — Все расходы в твоем кармане.</title>
+    <link rel="icon" type="image/x-icon" href="../logo.png" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="manifest" href="../manifest.json" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.10.0/localforage.min.js"
+      integrity="sha512-+BMamP0e7wn39JGL8nKAZ3yAQT2dL5oaXWr4ZYlTGkKOaoXM/Yj7c4oy50Ngz5yoUutAG17flueD4F6QpTlPng=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="./script.js"></script>
+  </head>
+
+  <body>
+    <!-- Импорт -->
+    <div class="modalImport">
+      <div class="import">
+        <button class="backToMainMenu">Назад</button>
+        <span class="title">Вставьте текст для импорта в формате JSON:</span>
+        <textarea rows="10"></textarea>
+        <button class="importButton">Импорт</button>
+      </div>
+    </div>
+
+    <!-- Экспорт -->
+    <div class="modalExport">
+      <div class="export">
+        <button class="backToMainMenu">Назад</button>
+        <span class="title">Скопируйте данные с поля:</span>
+        <textarea disabled readonly rows="10"></textarea>
+        <button class="exportButton">Экспорт</button>
+      </div>
+    </div>
+
+    <!-- Модальное окно для первоначального ввода доходов -->
+    <div class="modalRec">
+      <div class="debetModal">
+        <span>Введите сумму ЗП в это месяце:</span>
+        <input type="number" />
+        <button>Подтвердить</button>
+        <span class="alert">Доход не может быть отрицательным</span>
+      </div>
+    </div>
+
+    <!-- Окно для ввода нового дохода -->
+    <div class="modalNewReceive">
+      <div class="recCont">
+        <span>Введите сумму дохода:</span>
+        <input type="number" />
+        <div class="buttonsCont">
+          <button class="addReceive">Добавить</button>
+          <button class="cancelReceive">Отмена</button>
+        </div>
+        <span class="alert"></span>
+      </div>
+    </div>
+
+    <!-- Модальное окно для ввода новых расходов -->
+    <div class="modalSpent">
+      <div class="addSpentModal">
+        <span class="title">Новый расход:</span>
+        <div class="inputContainer">
+          <div>
+            <span>Сумма:</span>
+            <input type="number" />
+          </div>
+          <div>
+            <span>Описание:</span>
+            <textarea class="description" cols="50" rows="3"></textarea>
+          </div>
+          <div class="priorityContainer">
+            <span>Приоритет:</span>
+            <select class="priority">
+              <option>Не выбрано</option>
+              <option>Высокий</option>
+              <option>Средний</option>
+              <option>Низкий</option>
+            </select>
+          </div>
+          <div>
+            <span>Категория:</span>
+            <select class="category"></select>
+          </div>
+        </div>
+
+        <button class="newSpent">Добавить</button>
+        <button class="cancelSpent">Отмена</button>
+        <span class="alert">
+          К сожалению, сумма расхода не может быть больше оставшихся денег.
+        </span>
+      </div>
+    </div>
+
+    <!-- Меню настроек -->
+    <div class="settingsModal">
+      <div class="settings">
+        <button class="backToMainMenu">Назад</button>
+        <span class="title">Настройки</span>
+        <div class="currencyToggleContainer">
+          <span class="title">Текущая валюта</span>
+          <select class="currencyChanger">
+            <option>₽</option>
+            <option>$</option>
+            <option>€</option>
+          </select>
+        </div>
+        <div class="priorityTogglerContainer">
+          <span class="title"
+            >Включить приоритеты<br />
+            расходов</span
+          >
+          <input type="checkbox" />
+        </div>
+        <div class="categoriesMenu">
+          <span class="title">Список категорий</span>
+          <div class="newCategory">
+            <input type="text" />
+            <button class="addCategory">+</button>
+          </div>
+          <div class="categoriesList"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Главное меню -->
+    <div class="mainMenu">
+      <div class="menu">
+        <header>
+          <span class="title">Март 2024</span>
+          <div class="buttons">
+            <div>
+              <button class="toHelp">Помощь</button>
+              <button class="toSettings">Настройки</button>
+            </div>
+            <div>
+              <button class="toExport">Экспорт</button>
+              <button class="toImport">Импорт</button>
+            </div>
+          </div>
+        </header>
+        <div class="receiveBlock">
+          <!--    Доход    -->
+          <div class="receive">
+            <span class="title">Доход</span>
+            <div>
+              <span class="sum">4124 Р</span>
+              <button class="addNewReceive">+</button>
+            </div>
+          </div>
+          <!--    Оставшаяся сумма    -->
+          <div class="sum">
+            <span class="title">Оставшаяся сумма</span>
+            <span class="sum">4124 Р</span>
+          </div>
+        </div>
+        <div class="spentsBlock">
+          <!-- Диаграмма -->
+          <div class="diagram">
+            <span class="littleText">У вас нет расходов.</span>
+            <div class="chartBlock">
+              <p>Выберите диаграмму:</p>
+              <select class="changeChart">
+                <option>По категориям</option>
+                <option>По описаниям</option>
+                <option>По приоритетности</option>
+              </select>
+              <canvas id="cchart"></canvas>
+            </div>
+          </div>
+          <span class="title">Расходы</span>
+
+          <table>
+            <thead>
+              <tr>
+                <th colspan="5">Время</th>
+                <th class="priority" colspan="2">Приоритет</th>
+                <th colspan="2">Категория</th>
+                <th colspan="2">Сумма</th>
+                <th colspan="5">Описание</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+
+          <span class="littleText"
+            >Вы еще ничего не потратили. Чтобы создать расход, нажмите кнопку
+            “Добавить”.</span
+          >
+        </div>
+        <button class="addSpent">Добавить</button>
+        <button class="showDiagram">Статистика</button>
+      </div>
+    </div>
+  </body>
+</html>
