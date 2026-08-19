@@ -10,6 +10,8 @@ const FILES = [
     '/app/index.html',
     '/app/style.css',
     '/app/script.js',
+    '/app/chart.js',
+    '/app/localforage.min.js',
 
     '/app/imgs/mobile_4.jpg',
     '/app/imgs/mobile_3.jpg',
