@@ -121,29 +121,25 @@ function delElement(id) {
 
 // Валидация при изменении расхода в таблице
 function saveValidate(sum, prevSum) {
-  // Сумма должна переводиться из строки в число
   let s = Number(sum.trim());
 
-  // Находим сумму всех элементов + сумма текущего ряда
   let total = 0;
   monthStat.spents.forEach((row) => (total += row.sum));
-  total -= prevSum
+  total -= prevSum;
 
-  // Сумма не должна быть числом
   if (isNaN(s)) {
     alert("Сумма должна быть числом");
     return false;
   }
-  // Сумма не должна быть больше оставшейся суммы
-  else if (total > calculateDebet()) {
+  else if (total + s > monthStat.debet) {
     alert("Общая сумма расходов не может быть больше оставшейся суммы.");
     return false;
   }
-  // Если сумма равна нулю
   else if (s === 0) {
     alert("Сумма не может быть равна нулю.");
     return false;
   }
+
   return true;
 }
 
@@ -274,9 +270,8 @@ function renderTable() {
         renderSpents();
         renderDiagram();
         sync();
-        Rachel("div.sum > span.sum").textContent = `${calculateDebet()} ${
-          settings.currency
-        }`;
+        Rachel("div.sum > span.sum").textContent = `${calculateDebet()} ${settings.currency
+          }`;
         tdEditBtn.style.display = "table-cell";
         saveBtn.style.display = "none";
       }
@@ -513,9 +508,8 @@ function addNewSpent() {
   let category = Rachel("select.category").value;
 
   if (validate(sum, description)) {
-    let t = `${date.getDate()}.${
-      date.getMonth() + 1
-    } ${date.getHours()}:${date.getMinutes()}`;
+    let t = `${date.getDate()}.${date.getMonth() + 1
+      } ${date.getHours()}:${date.getMinutes()}`;
     monthStat.spents.push({
       id: Date.now(),
       date: t,
@@ -672,8 +666,8 @@ document.addEventListener("DOMContentLoaded", function () {
           .then((val) => (data[key] = val))
           .then(
             () =>
-              (Rachel(".modalExport > .export > textarea").value =
-                JSON.stringify(data))
+            (Rachel(".modalExport > .export > textarea").value =
+              JSON.stringify(data))
           )
       );
     });
@@ -712,7 +706,7 @@ document.addEventListener("DOMContentLoaded", function () {
       localforage.clear()
       // Заполняем indexedDB
       let info = JSON.parse(i)
-      
+
       Object.keys(info).map(key => {
         localforage.setItem(key, info[key])
       })
