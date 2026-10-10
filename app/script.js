@@ -161,7 +161,7 @@ function renderTable() {
   if (!settings.enablePriorities) priorityCol.style.display = "none";
   else priorityCol.style.display = "table-cell";
 
-  monthStat.spents.forEach((spent) => {
+  monthStat.spents.reverse().forEach((spent) => {
     let row = document.createElement("tr");
 
     let tdDate = document.createElement("td");
@@ -309,7 +309,7 @@ function calculateDebet() {
       s += spent.sum;
     });
   }
-  return monthStat.debet - s;
+  return (monthStat.debet - s).toFixed(2);
 }
 
 // Рендеринг расходов
