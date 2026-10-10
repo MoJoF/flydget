@@ -278,7 +278,7 @@ function renderTable() {
         renderSpents();
         renderDiagram();
         sync();
-        Rachel("div.sum > span.sum").textContent = `${calculateDebet()} ${settings.currency
+        Rachel("div.sum > span.sum").textContent = `${Number(calculateDebet()).toFixed(2)} ${settings.currency
           }`;
         tdEditBtn.style.display = "table-cell";
         saveBtn.style.display = "none";
